@@ -1041,6 +1041,8 @@ export default function App() {
   };
 
   const upgradePlan = async (plan) => {
+    const links = { starter: "https://buy.stripe.com/eVq7sLgEO77F6rLenW1ck01", pro: "https://buy.stripe.com/cNi9AT0FQ4ZxbM53Ji1ck00", lifetime: "https://buy.stripe.com/00w5kDcoy3Vtg2lenW1ck02" };
+    if (links[plan]) { window.location.href = links[plan]; return; }
     const updated = { ...user, plan };
     if (!demoMode) await storage.set('magot:user', updated);
     setUser(updated); setModal(null);
