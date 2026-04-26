@@ -3110,6 +3110,44 @@ const AssetDetail = ({ asset, onClose, onEdit, onQuickUpdate, onDelete }) => {
   );
 };
 
+
+/* ========== UPGRADE MODAL ========== */
+
+const UpgradeModal = ({ user, onClose, onUpgrade }) => {
+  const plans = [
+    { id: 'starter', name: '🚀 Starter', price: '2,99€/mois', trial: '7 jours gratuits', color: '#B8FF5A' },
+    { id: 'pro', name: '⚡ Pro', price: '6,99€/mois', trial: '14 jours gratuits', color: '#7BB3FF' },
+    { id: 'lifetime', name: '👑 Lifetime', price: '59€ one-time', trial: 'Accès à vie', color: '#E8C547' },
+  ];
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 fade-in"
+      style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
+      onClick={onClose}>
+      <div className="card p-6 w-full max-w-md scale-in" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="font-serif text-2xl">Passer Premium ✨</h2>
+          <button onClick={onClose} className="text-[#6E7074] hover:text-white transition">
+            <Icon name="x" size={20} />
+          </button>
+        </div>
+        <div className="flex flex-col gap-3">
+          {plans.map(p => (
+            <button key={p.id} onClick={() => { onUpgrade(p.id); onClose(); }}
+              className="card p-4 text-left hover:border-[#B8FF5A] transition"
+              style={{ borderColor: 'var(--border)' }}>
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-lg">{p.name}</span>
+                <span style={{ color: p.color }} className="font-bold">{p.price}</span>
+              </div>
+              <div className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{p.trial}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ========== ASSET MODAL ========== */
 
 const AssetModal = ({ asset, onClose, onSave }) => {
